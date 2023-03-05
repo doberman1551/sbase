@@ -15,7 +15,7 @@ const login = () => {
            const resp=await supabase.auth.signInWithPassword({email:email, password:password})
            if(resp.error) throw resp.error;
            const userId=resp.data.user?.id;
-           router.push("/");    
+           router.push("/dashboard");    
 
        
 

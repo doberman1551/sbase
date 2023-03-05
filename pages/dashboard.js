@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import supabase from '../utils/supabaseClient'
 import ImageUploading,{ ImageListType } from 'react-images-uploading'
+import {useRouter} from 'next/router'
 
-export default function Home() {
-  const [isAuthenticated, setIsAuthenticated]=useState('false');
+export default function Dashboard() {
+  const [isAuthenticated, setIsAuthenticated]=useState(false);
   const [userId,setUserId]=useState('');
   const [title,setTitle]=useState('');
   const [url, setUrl]=useState('');
   const[links,setlinks]=useState([])
   const [images,setImages]=useState([])
+  const router=useRouter()
 const onChange=(imageList)=>{
   setImages(imageList)
 }
@@ -24,7 +26,7 @@ const onChange=(imageList)=>{
         const userId=user.data.user?.id;
         setIsAuthenticated(true);
         setUserId(userId);
-      }
+      } else {router.push('/login')}
       };
       getUser()
   },[])
@@ -71,6 +73,8 @@ const onChange=(imageList)=>{
   } 
   }
 
+
+  
   return (
     <div>
     <h1 className="text-3xl font-bold underline">

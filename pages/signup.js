@@ -5,6 +5,7 @@ import supabase from '../utils/supabaseClient';
 const signup= () => {
  const [email,setEmail]=useState('');
  const [password,setPassword]=useState('');
+ const [submitted, setSubmitted]=useState(false)
  console.log(email);
  async function signUpWithEmail(e){
 
@@ -15,6 +16,7 @@ const signup= () => {
 		const userId=resp.data.user?.id;
 
 		console.log("userId:",userId);
+		setSubmitted(true)
 	
 
 
@@ -23,6 +25,17 @@ const signup= () => {
 
 	}
  }
+ if(submitted){
+
+	return(
+		<div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
+		
+		<h1 className="font-bold text-2xl">Thanks check your email for confirmation</h1>
+	
+		</div>
+	  )
+ }
+
     return (
    
     <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
@@ -50,7 +63,11 @@ const signup= () => {
 </div>
 
 
-  )
+  ) 
+
+
+  
+ 
 }
 
 export default signup
